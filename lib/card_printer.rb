@@ -11,6 +11,11 @@ module CardPrinter
   }
 
   def self.render(stories, destination_path, renderer_name = '6x4', opts = {})
-    LAYOUTS[renderer_name].new(stories, opts).render_to(destination_path)
+    renderer = LAYOUTS[renderer_name] || raise("Unknown layout renderer #{renderer_name}")
+    renderer.new(stories, opts).render_to(destination_path)
+  end
+
+  def self.available_layouts
+    LAYOUTS.keys
   end
 end
