@@ -11,4 +11,8 @@ class CardPrinter::Story
       self.send(:"#{attr_name}=", data[attr_name] || data[attr_name.to_s])
     end
   end
+
+  def to_s
+    Hash[ATTRS.map {|a| [a, self.send(a)] }].to_s
+  end
 end
