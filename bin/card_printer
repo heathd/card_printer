@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+
+require 'slop'
+require 'card_printer'
+require 'card_printer/story'
+require 'json'
+
+# stories << CardPrinter::Story.new(name: "Foobar")
+
+# CardPrinter.render(stories, "my_stories.pdf")
+
+
+class Cli
+  attr_reader :opts
+  class BadCliOptionError < StandardError; end
+
+  def initialize
+    @opts = Slop.parse(help: true) do
+      banner "Usage: #{File.basename(__FILE__)} [options] <output file.pdf>"
+      separator %{Options:}
+      on '-r=', 'renderer', %Q{Choose layout renderer (one of '#{CardPrinter.available_layouts.join("', '")}') }
+      on '-h=', %Q{display this help message}
+
+      separator %{
+Data input:
+
+Provide story data on standard input in json-lines format (one JSON object per
+line).
+
+Each json object represents a story with the following attributes:
+
+  * name (required)
+  * description
+  * label
+  * story_type - feature|bug|chore|other
+  * estimate
+
+e.g.
+
+{"name": "First story"}
+{"name": "Second story", "description": "Do some things", "label": "epic one", "story_type": "feature", "estimate": "1"}
+}
+    end
+
+  end
+ 
+  def renderer_name
+    opts[:renderer] || "6x4"
+  end
+
+  def run
+    if ARGV.size == 1
+      stories = []
+      $stdin.each_line do |line|
+        data = JSON.parse(line)
+        stories << CardPrinter::Story.new(data)
+      end
+
+      CardPrinter.render(stories, ARGV[0])
+    else
+      puts opts
+    end
+  end
+end
+
+Cli.new.run
