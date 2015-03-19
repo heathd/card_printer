@@ -1,9 +1,10 @@
 require "card_printer"
 
 class CardPrinter::Story
+  # story_type = {feature|bug|chore|other}
   ATTRS = [:story_type, :estimate, :name, :labels, :description]
   
-  attr_accessor ATTRS
+  attr_accessor *ATTRS
 
   def initialize(data = {})
     ATTRS.each do |attr_name|
