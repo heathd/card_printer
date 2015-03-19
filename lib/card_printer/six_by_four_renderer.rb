@@ -107,7 +107,7 @@ class CardPrinter::SixByFourRenderer
   end
 
   def render_story_tags(story)
-    label_text = (story.labels || "").strip
+    label_text = (story.label || "").strip
     if ! label_text.empty?
       @pdf.image image_path("label_icon.jpg"), at: [0, @pdf.cursor], fit: [6.mm * @scale, 6.mm * @scale]
       @pdf.fill_color "52D017"
