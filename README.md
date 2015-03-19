@@ -1,6 +1,7 @@
 # CardPrinter
 
-TODO: Write a gem description
+A general purpose library for generating PDFs which can be printed on 6x4
+index cards.
 
 ## Installation
 

@@ -6,10 +6,10 @@ require 'card_printer/version'
 Gem::Specification.new do |spec|
   spec.name          = "card_printer"
   spec.version       = CardPrinter::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["David Heath"]
   spec.email         = ["david@davidheath.org"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Produce nicely formatted PDFs of story cards for printing}
+  spec.summary       = %q{}
   spec.homepage      = ""
   spec.license       = "MIT"
 
