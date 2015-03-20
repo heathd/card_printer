@@ -5,21 +5,28 @@ index cards.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'card_printer'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+The recommended way is to just install the gem, this will also add a
+`card_printer` command:
 
     $ gem install card_printer
+
+If you use `rbenv` to manage ruby versions, remember to:
+
+    $ rbenv rehash
+
+after installing the gem.
 
 ## Usage
 
 You can use the card printer as a stand-alone binary.
+
+```
+Usage: card_printer [options] <output file.pdf>
+Options:
+    -p=, parser    Choose input parser (one of 'csv', 'json_lines', 'trello_json_export', default: trello_json_export)
+    -r=, renderer  Choose layout renderer (one of '6x4', 'a6', 'a5', default: '6x4')
+    -h=            display this help message
+```
 
 It accepts three types of data format as input:
 
@@ -62,15 +69,6 @@ To add it to your browser:
 3. select 'add page' or 'add bookmark'
 4. enter a name such as 'Show card IDs'
 5. in the URL field paste the javascript code
-
-```
-Usage: card_printer [options] <output file.pdf>
-Options:
-    -p=, parser    Choose input parser (one of 'csv', 'json_lines', 'trello_json_export', default: trello_json_export)
-    -r=, renderer  Choose layout renderer (one of '6x4', 'a6', 'a5', default: '6x4')
-    -h=            display this help message
-```
-
 
 ## Contributing
 
