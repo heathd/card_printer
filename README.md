@@ -91,6 +91,12 @@ To add it to your browser:
 4. enter a name such as 'Show card IDs'
 5. in the URL field paste the javascript code
 
+
+## Alternatives
+
+* [Peter Kappus's Trello Printer](http://www.peterkappus.com/trello/) - nifty printout of a whole board (not separate cards)
+* [Board Printer for Trello Chrome Plugin](https://chrome.google.com/webstore/detail/board-printer-for-trello/lpjpokeiblobbcpfheneagcfjlcjbkhf?hl=en) - makes quite nice small cards with title and image, printing onto regular paper. Could be good for card sorting exercise
+
 ## Contributing
 
 1. Fork it
