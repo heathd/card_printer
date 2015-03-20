@@ -3,6 +3,8 @@
 A general purpose library for generating PDFs which can be printed on 6x4
 index cards.
 
+[![Example card](docs/example_card.png)](docs/example_card.pdf)
+
 ## Installation
 
 The recommended way is to just install the gem, this will also add a
