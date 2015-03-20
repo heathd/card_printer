@@ -10,7 +10,7 @@ module CardPrinter
     "a5" => CardPrinter::Renderer
   }
 
-  def self.render(stories, destination_path, renderer_name = '6x4', opts = {})
+  def self.render(stories, destination_path, renderer_name, opts = {})
     renderer = LAYOUTS[renderer_name] || raise("Unknown layout renderer #{renderer_name}")
     renderer.new(stories, opts).render_to(destination_path)
   end

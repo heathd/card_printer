@@ -2,7 +2,7 @@
 
 require 'slop'
 require 'card_printer'
-require 'card_printer/story'
+require 'card_printer/parser'
 require 'json'
 
 # stories << CardPrinter::Story.new(name: "Foobar")
@@ -15,13 +15,19 @@ class Cli
   class BadCliOptionError < StandardError; end
 
   def initialize
-    @opts = Slop.parse(help: true) do
-      banner "Usage: #{File.basename(__FILE__)} [options] <output file.pdf>"
-      separator %{Options:}
-      on '-r=', 'renderer', %Q{Choose layout renderer (one of '#{CardPrinter.available_layouts.join("', '")}') }
-      on '-h=', %Q{display this help message}
+    @opts = Slop.parse do |o|
+      o.banner = "Usage: #{File.basename(__FILE__)} [options] <output file.pdf>"
+      o.separator %{Options:}
+      o.on('-p=', 'parser',
+        %Q{Choose input parser (one of '#{CardPrinter::Parser.available_parsers.join("', '")}', default: trello_json_export)},
+        default: 'trello_json_export'
+      )
+      o.on('-r=', 'renderer', "Choose layout renderer (one of '#{CardPrinter.available_layouts.join("', '")}', default: '6x4')",
+        default: '6x4'
+      )
+      o.on '-h=', %Q{display this help message}
 
-      separator %{
+      o.separator %{
 Data input:
 
 Provide story data on standard input in json-lines format (one JSON object per
@@ -41,24 +47,15 @@ e.g.
 {"name": "Second story", "description": "Do some things", "label": "epic one", "story_type": "feature", "estimate": "1"}
 }
     end
-
-  end
- 
-  def renderer_name
-    opts[:renderer] || "6x4"
   end
 
   def run
     if ARGV.size == 1
-      stories = []
-      $stdin.each_line do |line|
-        data = JSON.parse(line)
-        stories << CardPrinter::Story.new(data)
-      end
-
-      CardPrinter.render(stories, ARGV[0])
+      stories = CardPrinter::Parser.parse($stdin, opts[:parser])
+      CardPrinter.render(stories, ARGV[0], opts[:renderer])
     else
       puts opts
+      puts opts['parser']
     end
   end
 end

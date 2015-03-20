@@ -86,6 +86,7 @@ class CardPrinter::SixByFourRenderer
       render_crest
       render_story_title(story)
       render_story_points(story, padding_y)
+      render_story_id(story, padding_y)
     end
     render_iteration_number(story)
   end
@@ -143,6 +144,19 @@ class CardPrinter::SixByFourRenderer
           :width => card_width - 15.mm * @scale,
           valign: :bottom
         end
+    end
+  end
+
+  def render_story_id(story, padding_y)
+    return if story.id.to_s.empty?
+    @pdf.fill_color "000000"
+    @pdf.font "Helvetica" do
+      @pdf.text_box story.id.to_s,
+        :size => 10.mm * @scale,
+        :at => [@pdf.bounds.left, padding_y + 10.mm * @scale],
+        :width => @pdf.bounds.right - @pdf.bounds.left,
+        valign: :bottom,
+        align: :center
     end
   end
 
