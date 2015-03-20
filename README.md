@@ -55,7 +55,7 @@ The `card_printer` accepts three types of data format as input:
 
 for the `csv` and `json_lines` formats the stories can have the following fields:
   * name (required) - main story title
-  * story_type - determines the colour of the border {feature|bug|chore|other}
+  * story_type - determines the colour of the border {feature|bug|chore|retro|other}
   * estimate - number shown in bottom left corner
   * label - shown in bottom right of card (use for tags or epic names)
   * id - shown in bottom centre of card

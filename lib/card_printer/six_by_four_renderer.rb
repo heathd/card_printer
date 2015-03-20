@@ -177,6 +177,7 @@ class CardPrinter::SixByFourRenderer
     when "feature" then "85994b"
     when "bug" then "b10e1e"
     when "chore" then "b58840"
+    when "retro" then "ff78cb"
     else "000000"
     end
   end

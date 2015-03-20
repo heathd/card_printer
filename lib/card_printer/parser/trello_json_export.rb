@@ -53,6 +53,8 @@ class CardPrinter::Parser::TrelloJsonExport < CardPrinter::Parser::Base
       "bug"
     when /chore/i
       "chore"
+    when /retro/i
+      "retro"
     else
       "other"
     end
