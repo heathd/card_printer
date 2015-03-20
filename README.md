@@ -21,6 +21,12 @@ after installing the gem.
 You can use the card printer as a stand-alone binary.
 
 ```
+$ card_printer
+```
+
+Invoked with no arguments you'll see usage instructions.
+
+```
 Usage: card_printer [options] <output file.pdf>
 Options:
     -p=, parser    Choose input parser (one of 'csv', 'json_lines', 'trello_json_export', default: trello_json_export)
@@ -28,7 +34,20 @@ Options:
     -h=            display this help message
 ```
 
-It accepts three types of data format as input:
+Typical usage would be:
+
+1. export data from your trello board ([instructions](http://help.trello.com/article/747-exporting-data-from-trello-1)) which saves a file such as `aI48isTv.json`
+2. Run it using the shell `<` operator to provide the input data:
+
+    ```
+    $ card_printer output.pdf < aI48isTv.json
+    ```
+
+3. Done! Open `output.pdf`
+
+## Input formats
+
+The `card_printer` accepts three types of data format as input:
 
 * csv - should have headers matching the expected field names
 * json_lines - JSON Lines format with one card per line
@@ -49,7 +68,7 @@ for the `trello_json_export` format the data will be used in the following way:
   - label - not extracted at present
   - id - extracts the [short ID](https://trello.com/c/OvKHeqvC/1003-short-ids-for-cards) of the trello card.
 
-### About trello short IDs
+## About trello short IDs
 
 This is a new feature in Trello, and doesn't appear to work fully as
 described. I couldn't find a way to link to or directly open a trello card
