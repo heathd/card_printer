@@ -27,11 +27,10 @@ class CardPrinter::Parser::TrelloJsonExport < CardPrinter::Parser::Base
   end
 
   def cards_for_list_id(list_id)
-    data['cards'].select do |card|
-      card['idList'] == list_id
-    end.map do |card|
-      Card.new(card)
-    end
+    data['cards']
+      .select { |card| card['idList'] == list_id }
+      .reject { |card| if card['closed'] then puts "card #{card['name']} closed"; end; card['closed'] == true }
+      .map { |card| Card.new(card) }
   end
 
   def story_from_card(list, card)
